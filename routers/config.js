@@ -9,13 +9,17 @@
 const conf = require('../conf')
 const eos = require('../utils/eos')
 
+const crypto = require("crypto")
 const express = require('express')
 const router = express.Router()
 const fs = require('fs')
 
 router.route(["/"])
   .get((req, res, next) => {
-    if (req.session.secret === conf.secret) {
+    if (req.session.secret === conf.secret
+      || (req.query.secret
+        && crypto.createHash("sha256").update(conf.secret).digest("hex")
+          == req.query.secret)) {
       res.end(fs.readFileSync(conf.filePath, 'utf8'))
     } else {
       res.end('Not logged in yet!')
