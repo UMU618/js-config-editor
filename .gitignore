@@ -63,3 +63,6 @@ yarn.lock
 
 # Project
 conf.json
+
+# macOS
+.DS_Store

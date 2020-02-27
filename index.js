@@ -40,7 +40,7 @@ app.use((req, res, next) => {
   next()
 })
 
-const path = require('path')
+//const path = require('path')
 //app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./routers/root'))

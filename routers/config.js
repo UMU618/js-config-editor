@@ -29,9 +29,11 @@ router.route(["/"])
     if (req.session.secret === conf.secret) {
       let content = []
       for (let line of req.body.content.split(/\n/)) {
-        const name = line.trim()
-        if (name && eos.isValidEosName(name)) {
-          content.push(name)
+        const ln = line.trim()
+        const arr = ln.split(',')
+        if (arr && arr.length == 2 && eos.isValidEosName(arr[0])
+          && eos.isValidEosName(arr[1])) {
+          content.push(ln)
         }
       }
       content.sort()
